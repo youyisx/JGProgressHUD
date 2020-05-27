@@ -657,19 +657,16 @@ static UIViewAnimationOptions UIViewAnimationOptionsFromUIViewAnimationCurve(UIV
     if (!_blurView) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMotionOnHUDView) name:UIAccessibilityReduceMotionStatusDidChangeNotification object:nil];
         
-        UIBlurEffectStyle effect;
-        
+        UIBlurEffect *blurEffect = nil;
         if (self.style == JGProgressHUDStyleDark) {
-            effect = UIBlurEffectStyleDark;
+            blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         }
         else if (self.style == JGProgressHUDStyleLight) {
-            effect = UIBlurEffectStyleLight;
+            blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         }
-        else {
-            effect = UIBlurEffectStyleExtraLight;
+        else if (self.style == JGProgressHUDStyleExtraLight){
+            blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
         }
-        
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:effect];
         
         _blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         
